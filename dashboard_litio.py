@@ -30,7 +30,7 @@ df = pd.read_csv("df_filtrado.csv", sep=";", decimal=",", encoding="latin1")
 # ==============================
 st.title("Dashboard Geoquímico - Predicción de Litio")
 
-st.markdown("### Mapa de concentración de Litio - Colombia")
+st.markdown("### 🗺️ Mapa de concentración de Litio - Colombia")
 html_path = pathlib.Path("mapa_dual_con_heatmap_y_escala.html")
 html_str = html_path.read_text(encoding="latin1")
 st.components.v1.html(html_str, height=600, scrolling=True)
@@ -38,7 +38,7 @@ st.components.v1.html(html_str, height=600, scrolling=True)
 # ==============================
 # Sidebar con filtros
 # ==============================
-st.sidebar.header("Opciones de Visualización")
+st.sidebar.header("✅ Opciones de Visualización")
 
 numeric_cols = df.select_dtypes(include="number").columns.tolist()
 if "Li_ppm" in numeric_cols:
@@ -89,7 +89,7 @@ yaxis_title="Densidad de Probabilidad"
 st.plotly_chart(fig_hist, width='stretch')
 
 if kde!= True:
-    st.info("El histograma incluye una estimación de densidad de kernel (KDE) para mostrar la distribución de los datos.")
+    st.info("📈 El histograma incluye una estimación de densidad de kernel (KDE) para mostrar la distribución de los datos.")
     # Histograma
     st.subheader(f"Histograma de {var_scatter}")
     fig_hist = px.histogram(df, x=var_scatter, nbins=40,
@@ -97,7 +97,7 @@ if kde!= True:
     st.plotly_chart(fig_hist, width='stretch')
 else:
     # Histograma con KDE usando Plotly
-    st.subheader(f"Histograma de {var_scatter} con KDE")
+    st.subheader(f"📈 Histograma de {var_scatter} con KDE")
     data = df[var_scatter].dropna()
     fig_hist = ff.create_distplot([data], [var_scatter], show_hist=True, show_rug=False, bin_size=(data.max()-data.min())/40)
     # Personalizar ejes y título
